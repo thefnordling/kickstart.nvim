@@ -12,8 +12,6 @@ sudo apt update
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
-sudo apt install make gcc ripgrep unzip git xclip neovim
-sudo apt update
 sudo apt remove -y vim vim-tiny vi
 sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim make gcc
 sudo ln -sf /usr/bin/nvim /usr/bin/vi
