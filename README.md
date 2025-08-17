@@ -2,7 +2,7 @@
 
 ### Ubuntu 24.04 TL;DR
 
-This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It is a work in progress - my attemps to add LSP/debug and other IDE-like features to neovim until i can get to the point where i can productively code without a mouse! Ubuntu LTS is my go-to distro. If you are using that you should be able to just run the below bash script to install everything you need to have my neovim set up working for you.
+This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It is a work in progress - my attemps to add LSP/debug and other IDE-like features to neovim until i can get to the point where i can productively code without a mouse! I have configured features for the languages i use most often `go', `C#`, `Python`, `TypeScript` and `bash`.  Ubuntu LTS is my go-to distro. If you are using that you should be able to just run the below bash script to install everything you need to have my neovim set up working for you.
 
 There is a companion repo that goes along with this - [nvim-config-validation](https://github.com/thefnordling/nvim-config-validation) you can clone that repo and open up the different sample projects in it in order to validate that the setup and config is working for you.
 
