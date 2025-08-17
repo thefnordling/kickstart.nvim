@@ -50,6 +50,9 @@ echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-prod.g
 sudo apt update
 sudo apt install -y dotnet-sdk-8.0
 
+# Python 3 + pip
+sudo apt install -y python3 python3-pip python3-venv
+
 # Verify and clone your fork
 for b in nvim rg fd git go node npm; do printf '%-5s: ' "$b"; command -v "$b" || echo MISSING; done
 git clone https://github.com/thefnordling/kickstart.nvim.git ~/.config/nvim
