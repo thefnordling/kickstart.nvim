@@ -55,11 +55,15 @@ corepack enable || true
 npm install -g typescript
 
 echo "[9] .NET 8"
-curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+ | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+
+# Detect release info
+. /etc/os-release
+# Write repo line (single line; no wrapped URL)
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.
-com/repos/microsoft-ubuntu-noble-prod noble main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list >/dev/null
-sudo apt update
-sudo apt install -y dotnet-sdk-8.0
+com/ubuntu/${VERSION_ID}/prod ${VERSION_CODENAME} main" \
+ | sudo tee /etc/apt/sources.list.d/microsoft-prod.list >/dev/null
 
 echo "[10] Python 3"
 sudo apt install -y python3 python3-pip python3-venv
