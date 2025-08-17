@@ -9,6 +9,7 @@ There is a companion repo that goes along with this - [nvim-config-validation](h
 ```bash
 curl -fsSL https://raw.githubusercontent.com/thefnordling/kickstart.nvim/refs/heads/master/install.sh | bash
 ```
+then - restart your shell and launch `nvim` and Lazy should install everything for you.
 
 ## Introduction
 
