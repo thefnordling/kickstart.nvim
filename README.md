@@ -11,6 +11,13 @@ curl -fsSL https://raw.githubusercontent.com/thefnordling/kickstart.nvim/refs/he
 ```
 then - restart your shell and launch `nvim` and Lazy should install everything for you.
 
+you may see some errors on the initial startup, something like the below.   You can just ignore this and/or restart nvim.  Lazy is trying to install everything all at once and having some issues with that. it'll sort itself out eventually (try just launching nvim again)
+```
+Error executing vim.schedule lua callback: ...are/nvim/lazy/mason.nvim/lua/mason-core/package/init
+.lua:123: Package is already installing.
+stack traceback:
+```
+
 ## Introduction
 
 A starting point for Neovim that is:
