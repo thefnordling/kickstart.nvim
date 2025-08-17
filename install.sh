@@ -3,9 +3,9 @@ set -euo pipefail
 
 echo "[1] Download Neovim v0.11.3"
 curl -fsSLO https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz
-sudo tar -C /opt -xzf nvim-linux64.tar.gz
-sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
-rm nvim-linux64.tar.gz
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+rm nvim-linux-x86_64.tar.gz
 
 echo "[2] Remove old vi/vim"
 sudo apt remove -y vim vim-tiny vi || true
@@ -64,7 +64,7 @@ echo "[9] Python 3"
 sudo apt install -y python3 python3-pip python3-venv
 
 echo "[10] Verify tools"
-for b in nvim rg fd git go node npm dlv dotnet python3; do
+for b in nvim rg fd git go node npm dotnet python3; do
   printf '%-7s: %s\n' "$b" "$(command -v "$b" || echo MISSING)"
 done
 
