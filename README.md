@@ -8,7 +8,10 @@ sudo apt update
 sudo apt install -y software-properties-common
 sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt update
+sudo apt remove -y vim vim-tiny vi
 sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim
+sudo ln -sf /usr/bin/nvim /usr/bin/vi
+sudo ln -sf /usr/bin/nvim /usr/bin/vim
 
 # fd convenience symlink (Ubuntu names binary fdfind)
 command -v fd >/dev/null || sudo ln -s "$(command -v fdfind)" /usr/local/bin/fd
