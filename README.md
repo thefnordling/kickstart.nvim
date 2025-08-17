@@ -36,6 +36,7 @@ sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
 rm go${GO_VERSION}.linux-amd64.tar.gz
 grep -q '/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+source ~/.profile
 
 # nvm + latest LTS Node
 export NVM_DIR="$HOME/.nvm"
