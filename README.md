@@ -43,6 +43,7 @@ export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 nvm install --lts
 corepack enable || true
+npm install -g typescript
 
 # .NET SDK
 curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
@@ -52,6 +53,10 @@ sudo apt install -y dotnet-sdk-8.0
 
 # Python 3 + pip
 sudo apt install -y python3 python3-pip python3-venv
+pip3 install --user debugpy
+
+# Go debugging tools
+go install github.com/go-delve/delve/cmd/dlv@latest
 
 # Verify and clone your fork
 for b in nvim rg fd git go node npm; do printf '%-5s: ' "$b"; command -v "$b" || echo MISSING; done
