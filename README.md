@@ -44,6 +44,12 @@ export NVM_DIR="$HOME/.nvm"
 nvm install --lts
 corepack enable || true
 
+# .NET SDK
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
+sudo apt update
+sudo apt install -y dotnet-sdk-8.0
+
 # Verify and clone your fork
 for b in nvim rg fd git go node npm; do printf '%-5s: ' "$b"; command -v "$b" || echo MISSING; done
 git clone https://github.com/thefnordling/kickstart.nvim.git ~/.config/nvim
