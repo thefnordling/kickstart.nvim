@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "[1] Download Neovim v0.11.3"
-curl -fsSLO https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux64.tar.gz
+curl -fsSLO https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz
 sudo tar -C /opt -xzf nvim-linux64.tar.gz
 sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 rm nvim-linux64.tar.gz
