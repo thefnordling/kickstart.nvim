@@ -7,61 +7,7 @@ This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nv
 There is a companion repo that goes along with this - [nvim-config-validation](https://github.com/thefnordling/nvim-config-validation) you can clone that repo and open up the different sample projects in it in order to validate that the setup and config is working for you.
 
 ```bash
-# Base tools + Neovim stable PPA
-sudo apt update
-sudo apt install -y software-properties-common
-sudo add-apt-repository ppa:neovim-ppa/unstable -y
-sudo apt update
-sudo apt remove -y vim vim-tiny vi
-sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim make gcc
-sudo ln -sf /usr/bin/nvim /usr/bin/vi
-sudo ln -sf /usr/bin/nvim /usr/bin/vim
-
-# fd convenience symlink (Ubuntu names binary fdfind)
-command -v fd >/dev/null || sudo ln -s "$(command -v fdfind)" /usr/local/bin/fd
-
-# MesloLGS Nerd Font
-tmpdir="$(mktemp -d)"; cd "$tmpdir"
-curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
-unzip -q Meslo.zip -d Meslo
-mkdir -p ~/.local/share/fonts
-cp Meslo/*.ttf ~/.local/share/fonts/
-fc-cache -f
-cd ~; rm -rf "$tmpdir"
-
-# Go
-GO_VERSION=1.25.0
-curl -fsSLO https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go
-sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
-rm go${GO_VERSION}.linux-amd64.tar.gz
-grep -q '/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
-source ~/.profile
-
-# nvm + latest LTS Node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-. "$NVM_DIR/nvm.sh"
-nvm install --lts
-corepack enable || true
-npm install -g typescript
-
-# .NET SDK
-curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
-echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble main" | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
-sudo apt update
-sudo apt install -y dotnet-sdk-8.0
-
-# Python 3 + pip
-sudo apt install -y python3 python3-pip python3-venv
-
-# Go debugging tools
-go install github.com/go-delve/delve/cmd/dlv@latest
-
-# Verify and clone your fork
-for b in nvim rg fd git go node npm; do printf '%-5s: ' "$b"; command -v "$b" || echo MISSING; done
-git clone https://github.com/thefnordling/kickstart.nvim.git ~/.config/nvim
-echo "Set terminal font to MesloLGS NF and start: nvim"
+curl -fsSL https://raw.githubusercontent.com/thefnordling/kickstart.nvim/refs/heads/master/install.sh | bash
 ```
 
 ## Introduction
