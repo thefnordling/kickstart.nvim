@@ -65,15 +65,12 @@ sudo apt install -y dotnet-sdk-8.0
 echo "[10] Python 3"
 sudo apt install -y python3 python3-pip python3-venv
 
-echo "[11] Go delve"
-go install github.com/go-delve/delve/cmd/dlv@latest
-
-echo "[12] Verify tools"
+echo "[11] Verify tools"
 for b in nvim rg fd git go node npm dlv dotnet python3; do
   printf '%-7s: %s\n' "$b" "$(command -v "$b" || echo MISSING)"
 done
 
-echo "[13] Clone config"
+echo "[12] Clone config"
 [ -d "$HOME/.config/nvim" ] || git clone https://github.com/thefnordling/kickstart.nvim.git "$HOME/.config/nvim"
 
 echo "Done. Set terminal font to MesloLGS NF then run: nvim"
