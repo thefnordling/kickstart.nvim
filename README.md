@@ -54,7 +54,6 @@ sudo apt install -y dotnet-sdk-8.0
 
 # Python 3 + pip
 sudo apt install -y python3 python3-pip python3-venv
-pip3 install --user debugpy
 
 # Go debugging tools
 go install github.com/go-delve/delve/cmd/dlv@latest
