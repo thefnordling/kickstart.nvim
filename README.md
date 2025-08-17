@@ -1,5 +1,48 @@
 # kickstart.nvim
 
+### Ubuntu 24.04 TL;DR
+
+```bash
+# Base tools + Neovim stable PPA
+sudo apt update
+sudo apt install -y software-properties-common
+sudo add-apt-repository -y ppa:neovim-ppa/stable
+sudo apt update
+sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim
+
+# fd convenience symlink (Ubuntu names binary fdfind)
+command -v fd >/dev/null || sudo ln -s "$(command -v fdfind)" /usr/local/bin/fd
+
+# MesloLGS Nerd Font
+tmpdir="$(mktemp -d)"; cd "$tmpdir"
+curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
+unzip -q Meslo.zip -d Meslo
+mkdir -p ~/.local/share/fonts
+cp Meslo/*.ttf ~/.local/share/fonts/
+fc-cache -f
+cd ~; rm -rf "$tmpdir"
+
+# Go
+GO_VERSION=1.22.5
+curl -fsSLO https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
+rm go${GO_VERSION}.linux-amd64.tar.gz
+grep -q '/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+
+# nvm + latest LTS Node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+. "$NVM_DIR/nvm.sh"
+nvm install --lts
+corepack enable || true
+
+# Verify and clone your fork
+for b in nvim rg fd git go node npm; do printf '%-5s: ' "$b"; command -v "$b" || echo MISSING; done
+git clone https://github.com/thefnordling/kickstart.nvim.git ~/.config/nvim
+echo "Set terminal font to MesloLGS NF and start: nvim"
+```
+
 ## Introduction
 
 A starting point for Neovim that is:
