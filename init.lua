@@ -680,6 +680,49 @@ require('lazy').setup({
         gopls = {},
         pyright = {},
         omnisharp = {},
+        bashls = {},
+        ts_ls = {
+          on_attach = function(client, bufnr)
+            -- Disable tsserver formatting (let Prettier handle it)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+            
+            -- TypeScript-specific keymaps
+            local map = function(mode, lhs, rhs, desc)
+              vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+            end
+            
+            -- Basic LSP organize imports (no external plugin needed)
+            map('n', '<leader>co', function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                filter = function(action)
+                  return action.kind == 'source.organizeImports'
+                end,
+              })
+            end, 'TS Organize Imports')
+            
+            -- Add missing imports
+            map('n', '<leader>ci', function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                filter = function(action)
+                  return action.kind == 'source.addMissingImports'
+                end,
+              })
+            end, 'TS Add Missing Imports')
+            
+            -- Fix all auto-fixable issues
+            map('n', '<leader>cf', function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                filter = function(action)
+                  return action.kind == 'source.fixAll'
+                end,
+              })
+            end, 'TS Fix All')
+          end,
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -724,7 +767,13 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
 	'isort',
 	'black',
-	'csharpier'
+	'csharpier',
+        'typescript-language-server',
+        'prettier',
+        'eslint_d',
+        'bash-language-server',
+        'shfmt',
+        'shellcheck'
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -780,9 +829,19 @@ require('lazy').setup({
         -- Conform can also run multiple formatters sequentially
         python = { "isort", "black" },
 	cs = { "csharpier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        markdown = { "prettier" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+        zsh = { "shfmt" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
       formatters = {
         csharpier = {
@@ -961,7 +1020,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python', 'c_sharp', 'go' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python', 'c_sharp', 'go', 'typescript', 'tsx', 'javascript', 'json', 'jsonc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

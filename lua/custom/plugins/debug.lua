@@ -177,7 +177,7 @@ return {
         automatic_setup = true,
         ensure_installed = { "debugpy", "netcoredbg", "delve" },
         handlers = {
-          netcoredbg = function() end, -- Disable auto-setup for netcoredbg
+          -- Disable auto-setup for netcoredbg (we handle it manually)
         },
       })
       
