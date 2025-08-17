@@ -54,10 +54,9 @@ nvm install --lts
 corepack enable || true
 npm install -g typescript
 
-echo "[9] .NET 8" curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o
-/usr/share/keyrings/microsoft-prod.gpg sudo tee /etc/apt/sources.list.d/microsoft-prod.list >/dev/null <<'EOF' deb [arch=amd64
-signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/ubuntu/24.04/prod noble main EOF sudo apt update sudo apt install
--y dotnet-sdk-8.0
+echo "[9] .NET 8" curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg sudo
+tee /etc/apt/sources.list.d/microsoft-prod.list >/dev/null <<'EOF' deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-prod.gpg]
+https://packages.microsoft.com/ubuntu/24.04/prod noble main EOF sudo apt update sudo apt install -y dotnet-sdk-8.0
 
 echo "[10] Python 3"
 sudo apt install -y python3 python3-pip python3-venv
