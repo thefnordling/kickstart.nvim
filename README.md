@@ -2,16 +2,19 @@
 
 ### Ubuntu 24.04 TL;DR
 
-This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It is a work in progress - my attemps to add LSP/debug and other IDE-like features to neovim until i can get to the point where i can productively code without a mouse! I have configured features for the languages i use most often `go`, `C#`, `Python`, `TypeScript` and `bash`.  Ubuntu LTS is my go-to distro. If you are using that you should be able to just run the below bash script to install everything you need to have my neovim set up working for you.
+This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It is a work in progress - my attemps to add LSP/debug and other IDE-like features to neovim until i can get to the point where i can productively code without a mouse! I have configured features for the languages i use most often `go`, `C#`, `Python`, `TypeScript`, `bash` and `MarkDown`. Ubuntu LTS is my go-to distro. If you are using that you should be able to just run the below bash script to install everything you need to have my neovim set up working for you.
 
 There is a companion repo that goes along with this - [nvim-config-validation](https://github.com/thefnordling/nvim-config-validation) you can clone that repo and open up the different sample projects in it in order to validate that the setup and config is working for you.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/thefnordling/kickstart.nvim/refs/heads/master/install.sh | bash
 ```
+
 then - restart your shell and launch `nvim` and Lazy should install everything for you.
 
-you may see some errors on the initial startup, something like the below.   You can just ignore this and/or restart nvim.  Lazy is trying to install everything all at once and having some issues with that. it'll sort itself out eventually (try just launching nvim again)
+> [!NOTE]
+> you may see some errors on the initial startup, something like the below. You can just ignore this and/or restart nvim. Lazy is trying to install everything all at once and some of the calls are overlapping. it'll retry and sort itself out eventually (try launching nvim again)
+
 ```
 Error executing vim.schedule lua callback: ...are/nvim/lazy/mason.nvim/lua/mason-core/package/init
 .lua:123: Package is already installing.

@@ -681,6 +681,8 @@ require('lazy').setup({
         pyright = {},
         omnisharp = {},
         bashls = {},
+        html = {},
+        emmet_ls = { filetypes = { 'html','css','javascript','javascriptreact','typescript','typescriptreact' } },
         ts_ls = {
           on_attach = function(client, bufnr)
             -- Disable tsserver formatting (let Prettier handle it)
@@ -772,6 +774,8 @@ require('lazy').setup({
         'prettier',
         'eslint_d',
         'bash-language-server',
+        'html-lsp',
+        'emmet-language-server',
         'shfmt',
         'shellcheck'
       })
@@ -836,6 +840,7 @@ require('lazy').setup({
         json = { "prettier" },
         jsonc = { "prettier" },
         markdown = { "prettier" },
+        html = { "prettier" },
         sh = { "shfmt" },
         bash = { "shfmt" },
         zsh = { "shfmt" },
