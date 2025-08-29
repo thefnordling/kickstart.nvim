@@ -11,7 +11,10 @@ echo "[2] Remove old vi/vim"
 sudo apt remove -y vim vim-tiny vi || true
 
 echo "[3] Dev packages"
-sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim make gcc
+sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim make gcc python3
+
+wget -q -O- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+nvm install node
 
 echo "[4] Symlinks"
 sudo ln -sf /usr/bin/nvim /usr/bin/vi
