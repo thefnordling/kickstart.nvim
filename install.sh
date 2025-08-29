@@ -13,25 +13,6 @@ sudo apt remove -y vim vim-tiny vi || true
 echo "[3] Dev packages"
 sudo apt install -y git build-essential unzip curl xclip ripgrep fd-find fontconfig fonts-noto-color-emoji neovim make gcc python3 zsh
 
-wget -q -O- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-{ [ -f ~/.zshrc ] && grep -qxF 'export NVM_DIR="$HOME/.nvm"' ~/.zshrc; } || cat >> ~/.zshrc <<'EOF'
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
-EOF
-
-{ [ -f ~/.bashrc ] && grep -qxF 'export NVM_DIR="$HOME/.nvm"' ~/.bashrc; } || cat >> ~/.bashrc <<'EOF'
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-EOF
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-nvm install node
-
 echo "[4] Symlinks"
 sudo ln -sf /usr/bin/nvim /usr/bin/vi
 sudo ln -sf /usr/bin/nvim /usr/bin/vim
