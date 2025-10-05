@@ -98,9 +98,12 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
-vim.o.tabstop = 4      -- Number of spaces a tab counts for
-vim.o.shiftwidth = 4   -- Number of spaces for each indent
-vim.o.softtabstop = 4  -- Number of spaces for <Tab> in insert mode
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.o.tabstop = 4 -- Number of spaces a tab counts for
+vim.o.shiftwidth = 4 -- Number of spaces for each indent
+vim.o.softtabstop = 4 -- Number of spaces for <Tab> in insert mode
 vim.o.expandtab = true
 
 -- Make line numbers default
@@ -682,46 +685,46 @@ require('lazy').setup({
         omnisharp = {},
         bashls = {},
         html = {},
-        emmet_ls = { filetypes = { 'html','css','javascript','javascriptreact','typescript','typescriptreact' } },
+        emmet_ls = { filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } },
         ts_ls = {
           on_attach = function(client, bufnr)
             -- Disable tsserver formatting (let Prettier handle it)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
-            
+
             -- TypeScript-specific keymaps
             local map = function(mode, lhs, rhs, desc)
               vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
             end
-            
+
             -- Basic LSP organize imports (no external plugin needed)
             map('n', '<leader>co', function()
-              vim.lsp.buf.code_action({
+              vim.lsp.buf.code_action {
                 apply = true,
                 filter = function(action)
                   return action.kind == 'source.organizeImports'
                 end,
-              })
+              }
             end, 'TS Organize Imports')
-            
+
             -- Add missing imports
             map('n', '<leader>ci', function()
-              vim.lsp.buf.code_action({
+              vim.lsp.buf.code_action {
                 apply = true,
                 filter = function(action)
                   return action.kind == 'source.addMissingImports'
                 end,
-              })
+              }
             end, 'TS Add Missing Imports')
-            
+
             -- Fix all auto-fixable issues
             map('n', '<leader>cf', function()
-              vim.lsp.buf.code_action({
+              vim.lsp.buf.code_action {
                 apply = true,
                 filter = function(action)
                   return action.kind == 'source.fixAll'
                 end,
-              })
+              }
             end, 'TS Fix All')
           end,
         },
@@ -767,9 +770,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-	'isort',
-	'black',
-	'csharpier',
+        'isort',
+        'black',
+        'csharpier',
         'typescript-language-server',
         'prettier',
         'eslint_d',
@@ -777,7 +780,7 @@ require('lazy').setup({
         'html-lsp',
         'emmet-language-server',
         'shfmt',
-        'shellcheck'
+        'shellcheck',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -831,27 +834,27 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { "isort", "black" },
-	cs = { "csharpier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
-        markdown = { "prettier" },
-        html = { "prettier" },
-        sh = { "shfmt" },
-        bash = { "shfmt" },
-        zsh = { "shfmt" },
+        python = { 'isort', 'black' },
+        cs = { 'csharpier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        json = { 'prettier' },
+        jsonc = { 'prettier' },
+        markdown = { 'prettier' },
+        html = { 'prettier' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        zsh = { 'shfmt' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
       formatters = {
         csharpier = {
-          command = vim.fn.stdpath("data") .. "/mason/packages/csharpier/csharpier",
-          args = { "format", "--write-stdout" },
+          command = vim.fn.stdpath 'data' .. '/mason/packages/csharpier/csharpier',
+          args = { 'format', '--write-stdout' },
           stdin = true,
         },
       },
@@ -1057,7 +1060,27 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python', 'c_sharp', 'go', 'typescript', 'tsx', 'javascript', 'json', 'jsonc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'python',
+        'c_sharp',
+        'go',
+        'typescript',
+        'tsx',
+        'javascript',
+        'json',
+        'jsonc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1075,6 +1098,92 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  },
+
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+    cmd = { 'Neotree' },
+    keys = {
+      { '<leader>e', '<cmd>Neotree toggle left<CR>', desc = 'Neo-tree: Toggle' },
+      { '<leader>E', '<cmd>Neotree left reveal<CR>', desc = 'Neo-tree: Focus & Reveal Current File' },
+      { '<C-n>', '<cmd>Neotree toggle left<CR>', desc = 'Neo-tree: Toggle' },
+    },
+    init = function()
+      vim.cmd [[
+      cnoreabbrev <expr> Explore (getcmdtype() == ':' && getcmdline() ==# 'Explore') ? 'Neotree left reveal' : 'Explore'
+    ]]
+    end,
+    opts = {
+      close_if_last_window = false,
+      popup_border_style = 'rounded',
+      enable_git_status = true,
+      enable_diagnostics = true,
+      window = {
+        position = 'left',
+        width = 32,
+        mappings = {
+          ['<CR>'] = 'open',
+          ['l'] = 'open',
+          ['h'] = 'close_node',
+          ['v'] = 'open_vsplit',
+          ['s'] = 'open_split',
+          ['q'] = 'close_window',
+        },
+      },
+      filesystem = {
+        bind_to_cwd = false,
+        follow_current_file = { enabled = true, leave_dirs_open = false },
+        use_libuv_file_watcher = true,
+        hijack_netrw_behavior = 'open_current',
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = false,
+        },
+      },
+      buffers = {
+        follow_current_file = { enabled = true },
+      },
+    },
+  },
+
+  {
+    'ojroques/nvim-osc52',
+    event = 'VeryLazy',
+    config = function()
+      local ok, osc52 = pcall(require, 'osc52')
+      if not ok then
+        return
+      end
+      osc52.setup {
+        max_length = 0,
+        silent = true,
+        trim = false,
+      }
+      local function copy(lines, _)
+        osc52.copy(table.concat(lines, '\n'))
+      end
+      local function paste()
+        return { vim.fn.getreg '', vim.fn.getregtype '' }
+      end
+      vim.g.clipboard = {
+        name = 'osc52',
+        copy = { ['+'] = copy, ['*'] = copy },
+        paste = { ['+'] = paste, ['*'] = paste },
+      }
+      vim.api.nvim_create_autocmd('TextYankPost', {
+        callback = function()
+          if vim.v.event.operator == 'y' and vim.v.event.regname == '' then
+            osc52.copy_register ''
+          end
+        end,
+      })
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
@@ -1123,6 +1232,13 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
+})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'VeryLazy',
+  callback = function()
+    vim.opt.mouse = ''
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
