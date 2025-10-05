@@ -112,12 +112,14 @@ echo "[10] Verify tools"
 echo "Verifying installations:"
 for b in nvim vi vim rg fd git go node npm dotnet python3; do
   if command -v "$b" >/dev/null 2>&1; then
-    version=$(
-      case "$b" in
-        nvim|go|node|npm|dotnet|python3) $b --version 2>&1 | head -1 ;;
-        *) echo "OK" ;;
-      esac
-    )
+    case "$b" in
+      nvim|go|node|npm|dotnet|python3)
+        version=$($b --version 2>&1 | head -1 || true)
+        ;;
+      *)
+        version="OK"
+        ;;
+    esac
     printf '  %-10s: %s (%s)\n' "$b" "$(command -v "$b")" "$version"
   else
     printf '  %-10s: MISSING\n' "$b"
