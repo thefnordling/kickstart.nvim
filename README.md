@@ -6,20 +6,7 @@ This repo is a fork of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nv
 
 There is a companion repo that goes along with this - [nvim-config-validation](https://github.com/thefnordling/nvim-config-validation) you can clone that repo and open up the different sample projects in it in order to validate that the setup and config is working for you.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/thefnordling/kickstart.nvim/refs/heads/master/install.sh | bash
-```
-
-then - restart your shell and launch `nvim` and Lazy should install everything for you.
-
-> [!NOTE]
-> you may see some errors on the initial startup, something like the below. You can just ignore this and/or restart nvim. Lazy is trying to install everything all at once and some of the calls are overlapping. it'll retry and sort itself out eventually (try launching nvim again)
-
-```
-Error executing vim.schedule lua callback: ...are/nvim/lazy/mason.nvim/lua/mason-core/package/init
-.lua:123: Package is already installing.
-stack traceback:
-```
+Setup of my neovim environment is managed through scripts in my [dotfiles repo](https://github.com/thefnordling/dotfiles)
 
 ## Introduction
 
