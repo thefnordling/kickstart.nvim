@@ -1108,7 +1108,7 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
-    cmd = { 'Neotree' },
+    lazy = false,
     keys = {
       { '<leader>e', '<cmd>Neotree toggle left<CR>', desc = 'Neo-tree: Toggle' },
       { '<leader>E', '<cmd>Neotree left reveal<CR>', desc = 'Neo-tree: Focus & Reveal Current File' },
